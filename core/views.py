@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Note
+from .forms import NoteSearchForm
 
 def home(request):
     notes = Note.objects.all().order_by('-uploaded_at')
