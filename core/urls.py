@@ -9,6 +9,9 @@ urlpatterns = [
     path('upload/', views.upload_note, name='upload'),
     path('note/delete/<int:file_id>/', views.delete_file, name='delete_file'),
     path('explore-notes/', views.explore_notes, name='explore_notes'),
+    path('notifications/', views.notifications, name='notifications'),
+    path('note/<int:note_id>/', views.note_detail, name='note_detail'), 
+    path('note/<int:note_id>/add_comment/', views.add_comment_to_note, name='add_comment_to_note'),
 ]
 
 

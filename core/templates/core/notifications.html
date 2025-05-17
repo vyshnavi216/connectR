@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Notifications</h2>
+    <ul style="list-style: none; padding: 0;">
+        {% for notification in notifications %}
+            <li style="margin-bottom: 15px;{% if not notification.is_read %} font-weight: bold;{% endif %}">
+                {{ notification.message }}
+                <br>
+                <small style="color: #888888;">{{ notification.created_at|date:"M d, Y H:i" }}</small>
+            </li>
+        {% empty %}
+            <li>No notifications!.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
