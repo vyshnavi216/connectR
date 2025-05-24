@@ -11,4 +11,3 @@ urlpatterns = [
     path('explore-notes/', views.explore_notes, name='explore_notes'),
 ]
 
-

@@ -82,6 +82,7 @@ def upload_note(request):
     return render(request, 'core/upload.html', {'form': form, 'notes': notes})
 
 
+
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from .models import Note  # Use the correct model name
