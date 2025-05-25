@@ -52,6 +52,7 @@ from .forms import NoteForm
 from .models import Note
 from django.contrib.auth.decorators import login_required
 
+
 # @login_required
 # def upload_note(request):
 #     if request.method == 'POST':
