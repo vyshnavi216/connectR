@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2>{{ note.title }}</h2>
+<p>{{ note.description }}</p>
+<p><strong>Subject:</strong> {{ note.subject }}</p>
+<p><strong>Uploaded by:</strong> {{ note.uploaded_by.username }}</p>
+<p><a href="{{ note.file.url }}">Download Note</a></p>
+
+<h3>Comments</h3>
+<ul>
+    {% for comment in note.comments.all %}
+        <li><strong>{{ comment.user.username }}</strong>: {{ comment.text }}</li>
+    {% empty %}
+        <li>No comments yet.</li>
+    {% endfor %}
+</ul>
+
+<h3>Add a Comment</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Comment</button>
+</form>
+{% endblock %}
