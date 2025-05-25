@@ -41,10 +41,12 @@ def register(request):
 
     return render(request, 'core/register.html')
 
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+
 
         user = authenticate(request, username=username, password=password)
 
@@ -60,6 +62,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home')
+
 
 
 # @login_required
