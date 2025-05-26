@@ -59,6 +59,10 @@ def user_login(request):
 
     return render(request, 'core/login.html')
 
+
+
+
+
 def user_logout(request):
     logout(request)
     return redirect('home')
