@@ -1057,7 +1057,7 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background-color: rgba(255,255,255,0.3);
+            background-color: rgba(254,254,254,0.3);
             padding: 3px 10px;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -1122,7 +1122,7 @@
             gap: 7px;
             padding: 8px 16px;
             background-color: var(--accent);
-            color: white;
+            color: rgb(242, 236, 236);
             border-radius: 6px;
             text-decoration: none;
             font-size: 0.85rem;
@@ -1131,7 +1131,7 @@
         }
 
         .download-btn:hover {
-            background-color: #00B046;
+            background-color: #00B047;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,200,83,0.2);
         }
@@ -1239,7 +1239,7 @@
             <div class="nav-links">
                 <a href="#"><i class="fas fa-home"></i> Home</a>
                 <a href="#"><i class="fas fa-compass"></i> Explore</a>
-                <a href="#"><i class="fas fa-bell"></i> Notifications</a>
+                <a href="{% url 'notifications' %}"><i class="fas fa-bell"></i> Notifications</a>
             </div>
         </div>
     </nav>
