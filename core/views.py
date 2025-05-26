@@ -66,9 +66,6 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('home')
-
-
-
 # @login_required
 # def upload_note(request):
 #     if request.method == 'POST':

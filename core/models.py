@@ -21,6 +21,7 @@ SUBJECT_CHOICES = [
     ('maths', 'Mathematics'),
     ('physics', 'Physics'),
     ('cs', 'Computer Science'),
+    ('chemistry','chemistry'),
     ('other', 'Other'),
 ]
 
