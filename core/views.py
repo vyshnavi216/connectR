@@ -59,12 +59,13 @@ def user_login(request):
 
     return render(request, 'core/login.html')
 
+
+
+
+
 def user_logout(request):
     logout(request)
     return redirect('home')
-
-
-
 # @login_required
 # def upload_note(request):
 #     if request.method == 'POST':
@@ -174,6 +175,7 @@ def note_detail(request, note_id):
     else:
         form = CommentForm()
     return render(request, 'core/note_detail.html', {'note': note, 'form': form})
+
 
 
 
