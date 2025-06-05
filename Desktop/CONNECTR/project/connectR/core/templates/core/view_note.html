@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-gradient-to-tr from-purple-900 to-blue-800 text-white rounded-2xl shadow-lg">
+
+  <!-- Title -->
+  <h1 class="text-4xl font-bold mb-2">{{ note.title }}</h1>
+  <p class="text-sm opacity-80">Uploaded on {{ note.uploaded_at|date:"F j, Y" }}</p>
+
+  <!-- Author Info -->
+  <div class="flex items-center gap-4 mt-6 mb-4">
+    <img src="{{ note.author.profile.image.url }}" alt="author" />
+
+    <div>
+      <p class="text-lg font-semibold">{{ note.author.username }}</p>
+      <p class="text-sm text-gray-300">Note Contributor</p>
+    </div>
+  </div>
+
+  <!-- Subject & Tags -->
+  <div class="flex flex-wrap gap-2 mt-4">
+    <span class="bg-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full">📚 {{ note.subject }}</span>
+    {% for tag in note.tags.all %}
+      <span class="bg-purple-700 text-white text-xs font-medium px-3 py-1 rounded-full">#{{ tag.name }}</span>
+    {% endfor %}
+  </div>
+
+  <!-- Preview -->
+  <div class="mt-8 bg-white rounded-lg overflow-hidden shadow-inner">
+    <iframe src="{{ note.file.url }}" width="100%" height="600px">
+  This browser does not support PDFs. Please download the PDF to view it: <a href="{{ note.file.url }}">Download PDF</a>
+</iframe>
+
+  </div>
+
+  <!-- Description -->
+  <div class="mt-6">
+    <h2 class="text-2xl font-semibold mb-2">📝 Description</h2>
+    <p class="text-md text-gray-200 leading-relaxed">{{ note.description }}</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="mt-6 flex items-center gap-6 text-sm text-gray-300">
+    <p>⬇️ <strong>{{ note.download_count }}</strong> Downloads</p>
+    <p>🕒 Estimated Read: <strong>5 mins</strong></p>
+    <p>📁 File Type: <strong>{{ note.file.url|slice:"-3"|upper }}</strong></p>
+  </div>
+
+  <!-- Buttons -->
+  <div class="mt-6 flex gap-4">
+    <a href="{{ note.file.url }}" download class="bg-white text-purple-900 font-semibold px-5 py-2 rounded-lg hover:bg-purple-200 transition">
+      📅 Download
+    </a>
+    <a href="{% url 'report_note' note.id %}" class="bg-red-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-red-700 transition">
+      🚩 Report
+    </a>
+  </div>
+
+  <!-- Rating -->
+  <div class="mt-10">
+    <h3 class="text-xl font-bold mb-2">🌟 Rate This Note</h3>
+    <form method="post" action="{% url 'rate_note' note.id %}">
+      {% csrf_token %}
+      <div class="flex gap-1 text-2xl text-yellow-400">
+        {% for star in "12345" %}
+          <label>
+            <input type="radio" name="rating" value="{{ star }}" class="hidden" onchange="this.form.submit();">
+            <span class="cursor-pointer">⭐</span>
+          </label>
+        {% endfor %}
+      </div>
+    </form>
+    <p class="text-sm mt-1 text-gray-400">Average Rating: <strong>{{ average_rating|default:"Not rated yet" }}</strong></p>
+  </div>
+
+  <!-- Related Notes -->
+  <div class="mt-12">
+    <h3 class="text-2xl font-semibold mb-4">📌 More Notes from {{ note.author.username }}</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {% for related_note in related_notes %}
+        <a href="{% url 'view_note' related_note.id %}" class="bg-purple-800 p-4 rounded-lg hover:bg-purple-700 transition">
+          <h4 class="text-lg font-bold">{{ related_note.title }}</h4>
+          <p class="text-sm opacity-70">{{ related_note.subject }}</p>
+        </a>
+      {% empty %}
+        <p class="text-gray-400">No other notes by this user yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
